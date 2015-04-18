@@ -40,12 +40,14 @@ class WelcomeController extends Controller {
      */
     public function getIndex()
     {
-        return \Response::json($this->users->with('stores.products')->all());
+        $model = $this->users->all();
+        return view('jrs.user',compact(['model']));
     }
 
     public function getShow($id = 1)
     {
-        return \Response::json($this->users->find($id));
+        $model = $this->users->find($id);
+        return view('jrs.show-user',compact(['model']));
     }
 
     public function getCreateUser()

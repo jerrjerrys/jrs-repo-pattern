@@ -35,6 +35,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      */
     protected $skipCriteria = false;
 
+    protected $with = '';
+
     /**
      * @param App $app
      * @param Collection $collection
@@ -94,7 +96,18 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     }
 
     public function jrsCreate(array $data){
-        $mdl = isset($data['id']) && !empty($data['id']) ? new $this->model->find($data['id']) : new $this->model;
+        //dd($data['id']);
+        //dd($this->model->find($data['id']));
+        if(isset($data['id']) && !empty($data['id']))
+        {
+            $mdl = $this->model->find($data['id']);
+        }
+        else
+        {
+            $mdl = $this->model;
+        }
+
+        //dd($mdl);
 
         foreach($data as $key => $value)
         {
@@ -231,7 +244,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      */
 
     protected function eagerLoadRelations() {
-        if(!is_null($this->with)) {
+        if(!empty($this->with)) {
             foreach ($this->with as $relation) {
                 $this->model->with($relation);
             }
