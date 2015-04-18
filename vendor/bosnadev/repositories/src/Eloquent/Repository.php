@@ -93,6 +93,20 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         return $this->model->create($data);
     }
 
+    public function jrsCreate(array $data){
+        $mdl = isset($data['id']) && !empty($data['id']) ? new $this->model->find($data['id']) : new $this->model;
+
+        foreach($data as $key => $value)
+        {
+            if($key != '_token' && $key != 'id' && $key != '_method')
+            {
+                $mdl->$key = $value;
+            }
+        }
+
+        return $mdl->save();
+    }
+
     /**
      * @param array $data
      * @param $id
