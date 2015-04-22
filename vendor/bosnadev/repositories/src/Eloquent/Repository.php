@@ -101,9 +101,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         if(isset($data['id']) && !empty($data['id']))
         {
             $mdl = $this->model->find($data['id']);
-        }
-        else
-        {
+        }else{
             $mdl = $this->model;
         }
 

@@ -8,7 +8,7 @@
 
 namespace App\Repo;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 
 class StoresRepo extends Repository {

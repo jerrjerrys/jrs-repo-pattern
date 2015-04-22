@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Repo\UsersRepo as Users;
 use App\Repo\StoresRepo as Stores;
 use App\Repo\ProductsRepo as Products;
+use App\UserFormRequest as UFR;
 use Request;
 
 class WelcomeController extends Controller {
@@ -55,12 +56,12 @@ class WelcomeController extends Controller {
         return view('jrs.create-user');
     }
 
-    public function postCreateUser()
+    public function postCreateUser(UFR $request)
     {
         $request = Request::all();
         $request['password'] = !empty($request['password']) ? bcrypt($request['password']) : NULL;
 
-        return \Response::json($this->users->jrsCreate($request));
+        return redirect('/');
     }
 
 }
