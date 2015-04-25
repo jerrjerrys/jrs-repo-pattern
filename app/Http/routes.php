@@ -11,4 +11,4 @@
 |
 */
 
-Route::controller('/', 'WelcomeController');
+Route::controller('/', 'UserController');

@@ -2,14 +2,12 @@
 
 use App\Http\Controllers\Controller;
 use App\Repo\UsersRepo as Users;
-use App\Repo\StoresRepo as Stores;
-use App\Repo\ProductsRepo as Products;
 use App\UserFormRequest as UFR;
 use Request;
 
-class WelcomeController extends Controller {
+class UserController extends Controller {
 
-    private $users, $stores, $products;
+    private $users;
 
     /*
     |--------------------------------------------------------------------------
@@ -27,11 +25,9 @@ class WelcomeController extends Controller {
      *
      * @return void
      */
-    public function __construct(Users $users, Products $products, Stores $stores)
+    public function __construct(Users $users)
     {
         $this->users = $users;
-        $this->products = $products;
-        $this->stores = $stores;
     }
 
     /**
@@ -51,17 +47,24 @@ class WelcomeController extends Controller {
         return view('jrs.show-user',compact(['model']));
     }
 
+    public function getRemove($id = 1)
+    {
+        $model = $this->users->find($id);
+        return view('jrs.remove-user',compact(['model']));
+    }
+
     public function getCreateUser()
     {
         return view('jrs.create-user');
     }
 
-    public function postCreateUser(UFR $request)
+    public function postCrudUser(UFR $request)
     {
         $request = Request::all();
         $request['password'] = !empty($request['password']) ? bcrypt($request['password']) : NULL;
 
+        $this->users->jrsCRUD($request);
+
         return redirect('/');
     }
-
 }

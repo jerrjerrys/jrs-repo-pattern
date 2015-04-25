@@ -23,18 +23,24 @@ class UserFormRequest extends Req {
 	 */
 	public function rules()
 	{
+
         $request = Request::all();
 
-        $return = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-        ];
-
-        if(!empty($request['id']))
+        if(isset($request['DELETE']) && $request['DELETE'] == "TRUE")
         {
-            $return = array_except($return,['password']);
-            $return['email'] = 'required|email|unique:users,email,'.$request['id'];
+            $return = [];
+        }else{
+            $return = [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required',
+            ];
+
+            if(!empty($request['id']))
+            {
+                $return = array_except($return,['password']);
+                $return['email'] = 'required|email|unique:users,email,'.$request['id'];
+            }
         }
 
         return $return;

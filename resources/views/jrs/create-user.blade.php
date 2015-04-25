@@ -10,7 +10,7 @@
         <p class="error">{{ $error }}</p>
     @endforeach
 
-    {!! Form::open([ 'url' => 'create-user', 'method' => 'POST' ]) !!}
+    {!! Form::open([ 'url' => 'crud-user', 'method' => 'POST' ]) !!}
     <input type="hidden" name="id" value="{!! $model->id or NULL !!}" /><br/>
     <input type="text" placeholder="Name" name="name" value="{!! $model->name or NULL !!}" /><br/>
     <input type="text" placeholder="Email" name="email" value="{!! $model->email or NULL !!}" /><br/>

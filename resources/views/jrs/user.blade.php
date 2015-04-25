@@ -26,7 +26,7 @@
                 <td align="center">{!! $value->status or NULL !!}</td>
                 <td align="center">
                     <a href="{!! url('show/'.$value->id) !!}">Edit</a>
-                    <a>Remove</a>
+                    <a href="{!! url('remove/'.$value->id) !!}">Remove</a>
                 </td>
             </tr>
         @endforeach

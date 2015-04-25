@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder{
             'name' => 'jerrys',
             'email' => 'abipradjajerrystama@gmail.com',
             'password' => bcrypt('hahaha'),
-            'image' => 'http://www.google.co.id/imgres?imgurl=http://www.playbillvault.com/images/photo/B/i/thumbs/w208/Billie-Joe-Armstrong.jpg&imgrefurl=http://www.playbillvault.com/Person/Detail/5692/Billie-Joe-Armstrong&h=269&w=208&tbnid=MZz1uuoyeqtVvM:&zoom=1&docid=Q7cXI52ctUB9SM&ei=WbAxVaSfONGRuATCz4CIAQ&tbm=isch&ved=0CCMQMygDMAM',
+            'image' => 'hahaha',
             'status' => 'not-active'
         ]);
     }

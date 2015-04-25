@@ -95,7 +95,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         return $this->model->create($data);
     }
 
-    public function jrsCreate(array $data){
+    public function jrsCRUD(array $data){
+        //dd($data);
         //dd($data['id']);
         //dd($this->model->find($data['id']));
         if(isset($data['id']) && !empty($data['id']))
@@ -105,17 +106,24 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
             $mdl = $this->model;
         }
 
-        //dd($mdl);
-
-        foreach($data as $key => $value)
+        if(isset($data['DELETE']) && $data['DELETE'] == 'TRUE')
         {
-            if($key != '_token' && $key != 'id' && $key != '_method')
+            $return = $mdl->delete();
+        }else{
+            //dd($mdl);
+
+            foreach($data as $key => $value)
             {
-                $mdl->$key = $value;
+                if($key != '_token' && $key != 'id' && $key != '_method')
+                {
+                    $mdl->$key = $value;
+                }
             }
+
+            $return = $mdl->save();
         }
 
-        return $mdl->save();
+        return $return;
     }
 
     /**
