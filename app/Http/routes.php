@@ -11,4 +11,10 @@
 |
 */
 
-Route::controller('/', 'UserController');
+Route::any('/', function(){
+    return view('jrs.index');
+});
+
+Route::controller('/user', 'Repo\UserModule\UserController');
+Route::controller('/product', 'Repo\ProductModule\ProductController');
+Route::controller('/store', 'Repo\StoreModule\StoreController');

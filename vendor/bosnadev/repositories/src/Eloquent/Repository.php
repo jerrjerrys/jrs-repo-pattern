@@ -57,6 +57,13 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     public abstract function model();
 
     /**
+     * Specify Belongs To Many class name
+     *
+     * @return mixed
+     */
+    //public abstract function belongsToMany();
+
+    /**
      * @param array $columns
      * @return mixed
      */
@@ -96,21 +103,14 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     }
 
     public function jrsCRUD(array $data){
-        //dd($data);
-        //dd($data['id']);
-        //dd($this->model->find($data['id']));
-        if(isset($data['id']) && !empty($data['id']))
-        {
-            $mdl = $this->model->find($data['id']);
-        }else{
-            $mdl = $this->model;
-        }
+
+        $mdl = isset($data['id']) && !empty($data['id']) ? $this->model->find($data['id']) : $this->model;
+
 
         if(isset($data['DELETE']) && $data['DELETE'] == 'TRUE')
         {
             $return = $mdl->delete();
         }else{
-            //dd($mdl);
 
             foreach($data as $key => $value)
             {

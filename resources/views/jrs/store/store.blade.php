@@ -6,27 +6,25 @@
 </head>
 <body>
 <div>
-    <a href="{!! url('create-user') !!}"> Create </a>
+    <a href="{!! url('store/create-store') !!}"> Create </a>
     <table width="100%">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Image</th>
-            <th>Status</th>
+            <th>Owner</th>
+            <th>Store Name</th>
+            <th>Satus</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         @foreach($model as $key => $value)
             <tr>
-                <td align="center">{!! $value->name or NULL !!}</td>
-                <td align="center">{!! $value->email or NULL !!}</td>
-                <td align="center">{!! $value->image or NULL !!}</td>
+                <td align="center">{!! $value->users->name or NULL !!}</td>
+                <td align="center">{!! $value->store_name or NULL !!}</td>
                 <td align="center">{!! $value->status or NULL !!}</td>
                 <td align="center">
-                    <a href="{!! url('show/'.$value->id) !!}">Edit</a>
-                    <a href="{!! url('remove/'.$value->id) !!}">Remove</a>
+                    <a href="{!! url('store/show/'.$value->id) !!}">Edit</a>
+                    <a href="{!! url('store/remove/'.$value->id) !!}">Remove</a>
                 </td>
             </tr>
         @endforeach

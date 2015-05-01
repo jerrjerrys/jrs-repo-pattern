@@ -6,13 +6,13 @@
 </head>
 <body>
 <div>
+    <a href="{!! url('store') !!}" > Back </a>
 
-    {!! Form::open([ 'url' => 'crud-user', 'method' => 'POST' ]) !!}
+    {!! Form::open([ 'url' => 'store/crud-store', 'method' => 'POST' ]) !!}
     <input type="hidden" name="id" value="{!! $model->id !!}" /><br/>
     <input type="hidden" name="DELETE" value="TRUE" /><br/>
-    Name : <b>{!! $model->name or NULL !!}</b><br/>
-    Email : <b>{!! $model->email or NULL !!}</b><br/>
-    Image : <b>{!! $model->image or NULL !!}</b><br/>
+    Owner : <b>{!! $model->users->name or NULL !!}</b><br/>
+    Store Name : <b>{!! $model->store_name or NULL !!}</b><br/>
 
     <input type="submit" value="Remove !" />
 

@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration {
             $table->increments('id');
             $table->integer('store_id')->unsigned()->index();
             $table->string('product_name',255);
+            $table->timestamps();
         });
     }
 

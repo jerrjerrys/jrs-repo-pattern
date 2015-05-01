@@ -1,10 +1,12 @@
-<?php namespace App;
+<?php
+
+namespace App\Repo\StoreModule;
 
 use App\Http\Requests\Request as Req;
 use Request;
 
 
-class UserFormRequest extends Req {
+class StoreFormRequest extends Req {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -31,16 +33,10 @@ class UserFormRequest extends Req {
             $return = [];
         }else{
             $return = [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required',
+                'user_id' => 'required',
+                'store_name' => 'required',
+                'status' => 'required',
             ];
-
-            if(!empty($request['id']))
-            {
-                $return = array_except($return,['password']);
-                $return['email'] = 'required|email|unique:users,email,'.$request['id'];
-            }
         }
 
         return $return;
