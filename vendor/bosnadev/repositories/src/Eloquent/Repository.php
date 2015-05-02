@@ -26,6 +26,11 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     protected $model;
 
     /**
+     * @var
+     */
+    protected $jrsHasMany;
+
+    /**
      * @var Collection
      */
     protected $criteria;
@@ -35,6 +40,9 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      */
     protected $skipCriteria = false;
 
+    /**
+     * @var string
+     */
     protected $with = '';
 
     /**
@@ -47,6 +55,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         $this->criteria = $collection;
         $this->resetScope();
         $this->makeModel();
+        $this->jrsHasMany = $this->jrsHasMany();
     }
 
     /**
@@ -55,6 +64,14 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      * @return mixed
      */
     public abstract function model();
+
+    /**
+     * Specify
+     */
+    public function jrsHasMany()
+    {
+        return;
+    }
 
     /**
      * Specify Belongs To Many class name
@@ -102,16 +119,22 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         return $this->model->create($data);
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     */
     public function jrsCRUD(array $data){
 
-        $mdl = isset($data['id']) && !empty($data['id']) ? $this->model->find($data['id']) : $this->model;
+        dd($this->jrsHasMany);
 
+        $mdl = isset($data['id']) && !empty($data['id']) ? $this->model->find($data['id']) : $this->model;
 
         if(isset($data['DELETE']) && $data['DELETE'] == 'TRUE')
         {
             $return = $mdl->delete();
-        }else{
-
+        }
+        else
+        {
             foreach($data as $key => $value)
             {
                 if($key != '_token' && $key != 'id' && $key != '_method')

@@ -7,7 +7,13 @@ use Bosnadev\Repositories\Eloquent\Repository;
 
 class UsersRepo extends Repository{
 
-    public function model() {
+    public function model()
+    {
         return 'App\Repo\UserModule\User';
+    }
+
+    public function jrsHasMany()
+    {
+        return 'HAHAHA';
     }
 }

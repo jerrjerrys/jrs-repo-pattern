@@ -50,9 +50,9 @@ class StoreController extends Controller {
 
     public function postCrudStore(StoreFormRequest $request)
     {
-        $request = Request::all();
+        $post = Request::all();
 
-        $this->stores->jrsCRUD($request);
+        $this->stores->jrsCRUD($post);
 
         return redirect('/store');
     }

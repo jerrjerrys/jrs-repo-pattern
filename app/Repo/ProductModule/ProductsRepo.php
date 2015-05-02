@@ -4,10 +4,15 @@ namespace App\Repo\ProductModule;
 
 use Bosnadev\Repositories\Eloquent\Repository;
 
-
 class ProductsRepo extends Repository{
 
-    public function model() {
+    public function model()
+    {
         return 'App\Repo\ProductModule\Product';
+    }
+
+    public function jrsHasMany()
+    {
+        return 'HAHAHA';
     }
 }

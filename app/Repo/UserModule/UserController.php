@@ -41,10 +41,10 @@ class UserController extends Controller {
 
     public function postCrudUser(UserFormRequest $request)
     {
-        $request = Request::all();
-        $request['password'] = !empty($request['password']) ? bcrypt($request['password']) : NULL;
+        $post = Request::all();
+        $post['password'] = !empty($post['password']) ? bcrypt($post['password']) : NULL;
 
-        $this->users->jrsCRUD($request);
+        $this->users->jrsCRUD($post);
 
         return redirect('/user');
     }

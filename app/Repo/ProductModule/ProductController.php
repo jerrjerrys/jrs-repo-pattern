@@ -50,9 +50,9 @@ class ProductController extends Controller {
 
     public function postCrudProduct(ProductFormRequest $request)
     {
-        $request = Request::all();
+        $post = Request::all();
 
-        $this->products->jrsCRUD($request);
+        $this->products->jrsCRUD($post);
 
         return redirect('/product');
     }
