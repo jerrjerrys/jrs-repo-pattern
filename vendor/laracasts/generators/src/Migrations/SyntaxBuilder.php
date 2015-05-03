@@ -160,7 +160,6 @@ class SyntaxBuilder
         return implode("\n" . str_repeat(' ', 12), $fields);
     }
 
-
     /**
      * Construct the syntax to add a column.
      *

@@ -120,12 +120,14 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     }
 
     /**
+     * Magic Function Handle Basic CRUD Query
+     *
      * @param array $data
      * @return mixed
      */
     public function jrsCRUD(array $data){
 
-        dd($this->jrsHasMany);
+        //dd($this->jrsHasMany);
 
         $mdl = isset($data['id']) && !empty($data['id']) ? $this->model->find($data['id']) : $this->model;
 
