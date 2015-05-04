@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <a href="{!! url({{_REDIRECTBACT_}}) !!}" > Back </a>
+    <a href="{!! url({{_BACKLINK_}}) !!}" > Back </a>
 
     @foreach ($errors->all() as $error)
         <p class="error">{{ $error }}</p>
@@ -14,7 +14,7 @@
 
     {!! Form::open([ 'url' => '{{_OBJECTINSTANCE_}}/crud-{{_OBJECTINSTANCE_}}', 'method' => 'POST' ]) !!}
     <input type="hidden" name="id" value="{!! $model->id or NULL !!}" /><br/>
-    {{_FIELDS_}}
+    {{_CREATEFIELDS_}}
     <input type="submit" value="Submit !" />
     {!! Form::close() !!}
 </div>

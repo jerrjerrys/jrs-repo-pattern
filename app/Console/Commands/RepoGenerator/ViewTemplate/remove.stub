@@ -6,13 +6,13 @@
 </head>
 <body>
 <div>
-    <a href="{!! url('product') !!}" > Back </a>
+    <a href="{!! url({{_BACKLINK_}}) !!}" > Back </a>
 
-    {!! Form::open([ 'url' => 'product/crud-product', 'method' => 'POST' ]) !!}
+    {!! Form::open([ 'url' => '{{_OBJECTINSTANCE_}}/crud-{{_OBJECTINSTANCE_}}', 'method' => 'POST' ]) !!}
     <input type="hidden" name="id" value="{!! $model->id !!}" /><br/>
     <input type="hidden" name="DELETE" value="TRUE" /><br/>
-    Store : <b>{!! $model->stores->store_name or NULL !!}</b><br/>
-    Product Name : <b>{!! $model->product_name or NULL !!}</b><br/>
+
+    {{_REMOVEFIELDS_}}
 
     <input type="submit" value="Remove !" />
 

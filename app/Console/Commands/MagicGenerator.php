@@ -1,34 +1,33 @@
-<?php
+<?php namespace App\Console\Commands;
 
-namespace Laracasts\Generators\Commands;
-
-use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+
+use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Foundation\Composer;
 use Laracasts\Generators\Migrations\NameParser;
 use Laracasts\Generators\Migrations\SchemaParser;
 use Laracasts\Generators\Migrations\SyntaxBuilder;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
-class MigrationMakeCommand extends Command
+class MagicGenerator extends Command
 {
     use AppNamespaceDetectorTrait;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:migration:schema';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'jerrys:generate:module';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new migration class, and apply schema at the same time';
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Generate file input for the generator';
 
     /**
      * The filesystem instance.
@@ -37,44 +36,83 @@ class MigrationMakeCommand extends Command
      */
     protected $files;
 
-    /**
-     * Meta information for the requested migration.
+	/**
+	 * Create a new command instance.
      *
-     * @var array
-     */
-    protected $meta;
-
-    /**
-     * @var Composer
-     */
-    private $composer;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param Filesystem $files
-     * @param NameParser $parser
-     * @param Composer   $composer
-     */
-    public function __construct(Filesystem $files, Composer $composer)
-    {
-        parent::__construct();
-
+	 */
+	public function __construct(Filesystem $files, Composer $composer)
+	{
+		parent::__construct();
         $this->files = $files;
         $this->composer = $composer;
+	}
+
+
+
+	/**
+	 * Execute the console command.
+	 *
+	 * @return mixed
+	 */
+	public function fire()
+	{
+        $this->makeModule();
+	}
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array(
+            array('name', InputArgument::REQUIRED, 'The name of the object'),
+        );
     }
 
     /**
-     * Execute the console command.
+     * Get the console command options.
      *
-     * @return mixed
+     * @return array
      */
-    public function fire()
+    protected function getOptions()
     {
-        $this->meta = (new NameParser)->parse($this->argument('name'));
+        return [
+            ['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
+        ];
+    }
 
-        $this->makeMigration();
-        $this->makeModel();
+    /**
+     * Generate the desired module.
+     */
+    protected function makeModule()
+    {
+        $name = $this->argument('name');
+
+        if ($this->files->exists($path = $this->getModulePath($name)))
+        {
+            return $this->error($this->type.' already exists!');
+        }
+
+        $this->makeDirectory($path);
+
+        $this->files->put($path, $this->compileMigrationStub());
+
+        $this->info('Migration created successfully.');
+
+        $this->composer->dumpAutoloads();
+    }
+
+    /**
+     * Get the path to where we should store the module.
+     *
+     * @param  string $name
+     * @return string
+     */
+    protected function getModulePath($name)
+    {
+        return './database/migrations/'.date('Y_m_d_His').'_'.$name.'.php';
     }
 
     /**
@@ -225,31 +263,5 @@ class MigrationMakeCommand extends Command
     {
         return ucwords(str_singular(camel_case($this->meta['table'])));
     }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['name', InputArgument::REQUIRED, 'The name of the migration'],
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
-            ['model', null, InputOption::VALUE_OPTIONAL, 'Want a model for this table?', true],
-        ];
-    }
-
 
 }
