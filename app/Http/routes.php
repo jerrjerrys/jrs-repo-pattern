@@ -18,3 +18,4 @@ Route::any('/', function(){
 Route::controller('/user', 'Repo\UserModule\UserController');
 Route::controller('/product', 'Repo\ProductModule\ProductController');
 Route::controller('/store', 'Repo\StoreModule\StoreController');
+Route::resource('/tweets', 'Http\Controllers\TweetController');

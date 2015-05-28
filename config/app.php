@@ -146,7 +146,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-
+        'Laralib\L5scaffold\GeneratorsServiceProvider'
 	],
 
 	/*
@@ -161,7 +161,6 @@ return [
 	*/
 
 	'aliases' => [
-
 		'App'       => 'Illuminate\Support\Facades\App',
 		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
 		'Auth'      => 'Illuminate\Support\Facades\Auth',
@@ -196,7 +195,6 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
         'HTML'      => 'Illuminate\Html\HtmlFacade'
-
-	],
+	]
 
 ];

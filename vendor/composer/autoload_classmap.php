@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CreateProductsTable' => $baseDir . '/database/migrations/2015_04_18_015211_create_products_table.php',
     'CreateStoresTable' => $baseDir . '/database/migrations/2015_04_18_015156_create_stores_table.php',
+    'CreateTweetsTable' => $baseDir . '/database/migrations/2015_05_27_140152_create_tweets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2015_04_18_010648_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -429,5 +430,6 @@ return array(
     'StoresTableSeeder' => $baseDir . '/database/seeds/StoresTableSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
+    'TweetTableSeeder' => $baseDir . '/database/seeds/TweetTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );

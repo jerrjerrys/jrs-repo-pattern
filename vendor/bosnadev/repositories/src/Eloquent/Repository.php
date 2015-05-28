@@ -145,7 +145,11 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
                 }
             }
 
-            $return = $mdl->save();
+            $ret_data['save'] = $mdl->save();
+
+            $ret_data['id'] = $mdl->id;
+
+            $return = $ret_data;
         }
 
         return $return;
